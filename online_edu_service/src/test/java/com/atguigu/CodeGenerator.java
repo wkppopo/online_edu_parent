@@ -12,6 +12,9 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 /**
  * 逆向工程
+ *      :需要自定义 全局配置中的 globalConfig.setOutputDir的内容
+ *      ：需要自定义  数据源配置中的 url 和 password
+ *      ：需要自定义
  * @author
  * @since 2018/12/13
  */

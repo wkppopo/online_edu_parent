@@ -1,6 +1,8 @@
 package com.atguigu.edu.controller;
 
 
+import com.atguigu.edu.service.EduTeacherService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/edu-teacher")
 public class EduTeacherController {
+    @Autowired
+    private EduTeacherService eduTeacherService;
 
 }
 

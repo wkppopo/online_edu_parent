@@ -22,10 +22,10 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("edu_teacher")
+@TableName("edu_teacher") //mybatisPlus注解
+//swagger2生成文档
 @ApiModel(value="EduTeacher对象", description="讲师")
 public class EduTeacher implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "讲师ID")
