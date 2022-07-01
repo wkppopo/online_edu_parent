@@ -1,6 +1,8 @@
 package com.atguigu.edu.service;
 
 import com.atguigu.edu.entity.EduTeacher;
+import com.atguigu.edu.request.TeacherConditionVO;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduTeacherService extends IService<EduTeacher> {
 
+    void queryTeacherPageByCondition(Page<EduTeacher> teacherPage, TeacherConditionVO teacherConditionVO);
 }
