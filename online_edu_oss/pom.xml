@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>online_edu-oss</artifactId>
+    <artifactId>online_edu_oss</artifactId>
     <dependencies>
         <!--        alibaba 对象存储服务-->
         <dependency>

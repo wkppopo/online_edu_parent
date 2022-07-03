@@ -1,18 +1,19 @@
-package com.atguigu.edu.service.impl;
+package com.atguigu.edu.service1.impl;
 
 import com.alibaba.excel.EasyExcel;
 import com.atguigu.edu.entity.EduSubject;
 import com.atguigu.edu.entity.SubjectExcel;
+import com.atguigu.edu.exception.MyException1;
 import com.atguigu.edu.listener.SubjectListener;
 import com.atguigu.edu.mapper.EduSubjectMapper;
 import com.atguigu.edu.response.SubjectVO;
-import com.atguigu.edu.service.EduSubjectService;
+import com.atguigu.edu.service1.EduSubjectService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
     /**
      * 当SubjectListener 类中的service使用了依赖注入后，下面subjectListener也必须使用依赖注入，否则空指针异常
      */
-    @Autowired
+    @Resource
     private SubjectListener subjectListener;
 
     //excelListener用到
@@ -80,4 +81,48 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
         EasyExcel.read(inputStream, SubjectExcel.class,subjectListener).doReadAll();
         return true;
     }
+
+    @Override
+    public boolean deleteSubjectById(String id) {
+        //删除节点，需要判断是否有子节点
+        QueryWrapper<EduSubject> wrapper = new QueryWrapper<>();
+        wrapper.eq("parent_id",id);
+        Integer integer = baseMapper.selectCount(wrapper);
+        if (integer==0) {
+            //如果查询到的数量为0，表示它没有子节点
+            return baseMapper.deleteById(id)>0;
+        }else{
+            throw new MyException1(20001,"该节点存在子节点");
+        }
+    }
+
+    /**
+     *  保存二级分类信息
+     */
+    @Override
+    public boolean savChildSubject(EduSubject eduSubject) {
+        //判断二级分类是否存在
+        EduSubject childSubject= existSubject(eduSubject.getTitle(),eduSubject.getParentId());
+        if (childSubject==null) {
+            return baseMapper.insert(eduSubject)>0;
+        }
+        return false;
+    }
+
+    /**
+     * 保存一级分类信息
+     */
+    @Override
+    public boolean savParentSubject(EduSubject eduSubject) {
+        //判断该一级分类是否存在
+        EduSubject parentSubject= existSubject(eduSubject.getTitle(),"0");
+        if (parentSubject==null) {
+            parentSubject=new EduSubject();
+            parentSubject.setTitle(eduSubject.getTitle());
+            parentSubject.setParentId("0");
+            return baseMapper.insert(parentSubject)>0;
+        }
+        return false;
+    }
+
 }

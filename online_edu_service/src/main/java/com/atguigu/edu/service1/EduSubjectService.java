@@ -1,4 +1,4 @@
-package com.atguigu.edu.service;
+package com.atguigu.edu.service1;
 
 import com.atguigu.edu.entity.EduSubject;
 import com.atguigu.edu.response.SubjectVO;
@@ -24,4 +24,10 @@ public interface EduSubjectService extends IService<EduSubject> {
     List<SubjectVO> getAllSubject();
 
     Boolean uploadSubject(MultipartFile file) throws IOException;
+
+    boolean deleteSubjectById(String id);
+
+    boolean savParentSubject(EduSubject eduSubject);
+
+    boolean savChildSubject(EduSubject eduSubject);
 }

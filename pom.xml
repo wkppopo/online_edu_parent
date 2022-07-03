@@ -10,7 +10,7 @@
     <modules>
         <module>online_edu_service</module>
         <module>online_edu_common</module>
-        <module>online_edu-oss</module>
+        <module>online_edu_oss</module>
     </modules>
     <packaging>pom</packaging>
 

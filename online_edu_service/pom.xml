@@ -51,12 +51,6 @@
             <artifactId>velocity-engine-core</artifactId>
         </dependency>
 
-        <!--开发者工具-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
     </dependencies>
 
 
