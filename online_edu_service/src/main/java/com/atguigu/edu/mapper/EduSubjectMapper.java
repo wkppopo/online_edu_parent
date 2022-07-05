@@ -2,6 +2,7 @@ package com.atguigu.edu.mapper;
 
 import com.atguigu.edu.entity.EduSubject;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.mybatis.spring.annotation.MapperScan;
 
 /**
  * <p>

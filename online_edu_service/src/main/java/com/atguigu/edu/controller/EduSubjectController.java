@@ -4,7 +4,7 @@ package com.atguigu.edu.controller;
 import com.atguigu.edu.entity.EduSubject;
 import com.atguigu.edu.response.RetVal;
 import com.atguigu.edu.response.SubjectVO;
-import com.atguigu.edu.service1.EduSubjectService;
+import com.atguigu.edu.service.EduSubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

@@ -3,7 +3,7 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.atguigu.edu.entity.EduSubject;
 import com.atguigu.edu.entity.SubjectExcel;
-import com.atguigu.edu.service1.EduSubjectService;
+import com.atguigu.edu.service.EduSubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

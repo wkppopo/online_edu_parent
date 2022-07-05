@@ -1,4 +1,4 @@
-package com.atguigu.edu.service1.impl;
+package com.atguigu.edu.service.impl;
 
 import com.alibaba.excel.EasyExcel;
 import com.atguigu.edu.entity.EduSubject;
@@ -7,7 +7,7 @@ import com.atguigu.edu.exception.MyException1;
 import com.atguigu.edu.listener.SubjectListener;
 import com.atguigu.edu.mapper.EduSubjectMapper;
 import com.atguigu.edu.response.SubjectVO;
-import com.atguigu.edu.service1.EduSubjectService;
+import com.atguigu.edu.service.EduSubjectService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

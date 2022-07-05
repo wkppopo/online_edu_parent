@@ -27,8 +27,9 @@ public class EduTeacherController {
 
     //查询所有
     @GetMapping
-    public List<EduTeacher> getTeacherList(){
-        return eduTeacherService.list(null);
+    public RetVal getTeacherList(){
+        List<EduTeacher> teacherList = eduTeacherService.list(null);
+        return RetVal.success().data("teacherList",teacherList);
     }
 
     //removeById 逻辑删除

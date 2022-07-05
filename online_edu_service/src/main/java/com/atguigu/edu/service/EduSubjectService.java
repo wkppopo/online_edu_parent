@@ -1,4 +1,4 @@
-package com.atguigu.edu.service1;
+package com.atguigu.edu.service;
 
 import com.atguigu.edu.entity.EduSubject;
 import com.atguigu.edu.response.SubjectVO;
