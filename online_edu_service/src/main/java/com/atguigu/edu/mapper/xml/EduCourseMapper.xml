@@ -2,4 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.atguigu.edu.mapper.EduCourseMapper">
 
+    <select id="queryCourseConfirmInfo" resultType="com.atguigu.edu.response.CourseConfirmVO">
+        SELECT
+			a.id courseId,
+			a.cover,
+			a.title courseName,
+			a.lesson_num lessonNum,
+			a.price,
+			b.NAME teacherName,
+			c.title parentSubjectName,
+			d.title childSubjectName
+		FROM
+			edu_course a
+			LEFT JOIN edu_teacher b ON a.teacher_id = b.id
+			LEFT JOIN edu_subject c ON a.parent_subject_id = c.id
+			LEFT JOIN edu_subject d ON a.child_subject_id = d.id
+		where a.id= #{courseId}
+    </select>
 </mapper>

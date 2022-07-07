@@ -3,6 +3,7 @@ package com.atguigu.edu.service;
 import com.atguigu.edu.entity.EduCourse;
 import com.atguigu.edu.request.CourseCondition;
 import com.atguigu.edu.request.CourseInfoVo;
+import com.atguigu.edu.response.CourseConfirmVO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -16,12 +17,16 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduCourseService extends IService<EduCourse> {
 
-    void saveCourseInfo(CourseInfoVo courseInfoVO);
+    String saveCourseInfo(CourseInfoVo courseInfoVO);
 
     void queryCoursePageByCondition(Page<EduCourse> coursePage, CourseCondition courseCondition);
 
     CourseInfoVo getCourseById(String id);
 
     void updateCourseInfo(CourseInfoVo courseInfoVo);
+
+    CourseConfirmVO queryCourseConfirmInfo(String courseId);
+
+    void deleteCourseById(String courseId);
 
 }

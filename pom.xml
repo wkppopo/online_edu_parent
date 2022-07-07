@@ -11,6 +11,8 @@
         <module>online_edu_service</module>
         <module>online_edu_common</module>
         <module>online_edu_oss</module>
+        <module>online_edu_video</module>
+        <module>online_edu_register</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -69,6 +71,18 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
 
 
 </project>

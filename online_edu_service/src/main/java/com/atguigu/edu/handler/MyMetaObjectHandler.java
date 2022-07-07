@@ -21,6 +21,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         //参数fieldName 指的是Java实体类的字段名而不是数据库的字段名
         this.setFieldValByName("gmtCreate",new Date(),metaObject);
         this.setFieldValByName("gmtModified",new Date(),metaObject);
+        this.setFieldValByName("version",0L,metaObject);
     }
 
     @Override

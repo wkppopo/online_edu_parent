@@ -42,3 +42,29 @@
 4.第八天
     使用逆向工程生成course /course_description表
     
+    
+    2.出现的问题
+    		a.情况
+    			Invalid bound statement (not found): com.atguigu.edu.mapper.EduCourseMapper
+    		b.分析原因
+    			class编译目录下 没有找到mapper与之对于的xml文件
+    		c.解决办法
+    			第一种方案
+    				让src/main/java目录下要有xml文件
+    				<build>
+    					<resources>
+    						<resource>
+    							<directory>src/main/java</directory>
+    							<includes>
+    								<include>**/*.xml</include>
+    							</includes>
+    							<filtering>false</filtering>
+    						</resource>
+    					</resources>
+    				</build>
+    				为了让其生效 必须要rebuild一下项目
+    				还得告诉mybatis xml路径在那个地方
+    					mybatis-plus.mapper-locations=classpath:com/atguigu/edu/mapper/xml/*.xml
+    			第二种方案
+    				把xml文件放到resources目录下 需要同mapper所在的包同一级
+    				如果不在同一级 还是需要配置 mybatis-plus.mapper-locations

@@ -5,8 +5,11 @@ import com.atguigu.edu.entity.EduCourseDescription;
 import com.atguigu.edu.mapper.EduCourseMapper;
 import com.atguigu.edu.request.CourseCondition;
 import com.atguigu.edu.request.CourseInfoVo;
+import com.atguigu.edu.response.CourseConfirmVO;
+import com.atguigu.edu.service.EduChapterService;
 import com.atguigu.edu.service.EduCourseDescriptionService;
 import com.atguigu.edu.service.EduCourseService;
+import com.atguigu.edu.service.EduSectionService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -28,21 +31,31 @@ import org.springframework.transaction.annotation.Transactional;
 public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse> implements EduCourseService {
     @Autowired
     private EduCourseDescriptionService eduCourseDescriptionService;
+    @Autowired
+    private EduChapterService eduChapterService;
+    @Autowired
+    private EduSectionService eduSectionService;
+
 
     //1.保存课程信息
     @Transactional
     @Override
-    public void saveCourseInfo(CourseInfoVo courseInfoVO) {
+    public String saveCourseInfo(CourseInfoVo courseInfoVO) {
         //保存课程信息
         EduCourse eduCourse = new EduCourse();
+        if (courseInfoVO.getChildSubjectId()==null){
+            courseInfoVO.setChildSubjectId("");
+        }
         BeanUtils.copyProperties(courseInfoVO,eduCourse);
         baseMapper.insert(eduCourse);
+
         //保存课程的描述信息
         EduCourseDescription eduCourseDescription = new EduCourseDescription();
         eduCourseDescription.setId(eduCourse.getId());
 
         eduCourseDescription.setDescription(courseInfoVO.getDescription());
         eduCourseDescriptionService.save(eduCourseDescription);
+        return eduCourse.getId();
     }
 
     //2.带条件分页查询
@@ -87,6 +100,29 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         eduCourseDescription.setId(courseInfoVo.getId());
         eduCourseDescription.setDescription(courseInfoVo.getDescription());
         eduCourseDescriptionService.updateById(eduCourseDescription);
+    }
+
+    ///查询课程确认封面信息表
+    @Override
+    public CourseConfirmVO queryCourseConfirmInfo(String courseId) {
+        return baseMapper.queryCourseConfirmInfo(courseId);
+    }
+
+    /**
+     *  像这种在一个方法中操作多个业务对象的场景，**需要添加事务**
+     */
+    //删除课程信息
+    @Override
+    public void deleteCourseById(String courseId) {
+        //a.该课程所对应的所有章节
+        eduChapterService.deleteChapterByCourseId(courseId);
+        //b.该课程所对应的所有小节
+        eduSectionService.deleteSectionByCourseId(courseId);
+        //c.该课程的基本信息
+        baseMapper.deleteById(courseId);
+        //c.该课程的描述信息
+        eduCourseDescriptionService.removeById(courseId);
+        //d.整个过程要保证完整性(分布式事务)
     }
 
 }

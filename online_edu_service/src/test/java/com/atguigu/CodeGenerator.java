@@ -49,7 +49,7 @@ public class CodeGenerator {
 
         // 3、数据源配置
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
-        dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/online_edu?serverTimezone=GMT%2B8");
+        dataSourceConfig.setUrl("jdbc:mysql://192.168.2.128:3306/online_edu?serverTimezone=GMT%2B8");
         dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
         dataSourceConfig.setUsername("root");
         dataSourceConfig.setPassword("root");
@@ -72,7 +72,7 @@ public class CodeGenerator {
          * 后期需要逆向生成其它表信息时，修改下面这个 表名
          *  //edu_course  // edu_course_description
          */
-        strategy.setInclude("edu_course","edu_course_description");
+        strategy.setInclude("edu_section");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(packageConfig.getModuleName() + "_"); //生成实体时去掉表前缀
 

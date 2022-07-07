@@ -4,6 +4,7 @@ package com.atguigu.edu.controller;
 import com.atguigu.edu.entity.EduCourse;
 import com.atguigu.edu.request.CourseCondition;
 import com.atguigu.edu.request.CourseInfoVo;
+import com.atguigu.edu.response.CourseConfirmVO;
 import com.atguigu.edu.response.RetVal;
 import com.atguigu.edu.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -30,8 +31,9 @@ public class EduCourseController {
     //1.保存课程信息
     @PostMapping("saveCourseInfo")
     public RetVal saveCourseInfo(CourseInfoVo courseInfoVO){
-        courseService.saveCourseInfo(courseInfoVO);
-        return RetVal.success();
+        System.out.println("阿斯蒂芬");
+        String id=courseService.saveCourseInfo(courseInfoVO);
+        return RetVal.success().data("courseId",id);
     }
 
     //2.分页查询课程信息带条件
@@ -58,6 +60,28 @@ public class EduCourseController {
     @PutMapping("updateCourseInfo")
     public RetVal updateCourseInfo(CourseInfoVo courseInfoVo){
         courseService.updateCourseInfo(courseInfoVo);
+        return RetVal.success();
+    }
+
+    //5.查询课程发布确认信息
+    @GetMapping("queryCourseConfirmInfo/{courseId}")
+    public RetVal queryCourseConfirmInfo(@PathVariable String courseId){
+        CourseConfirmVO courseConfirmVo=courseService.queryCourseConfirmInfo(courseId);
+        return RetVal.success().data("courseConfirmVo",courseConfirmVo);
+    }
+    //6.课程的发布
+    @GetMapping("publishCourse/{courseId}")
+    public RetVal publishCourse(@PathVariable String courseId){
+        EduCourse course = new EduCourse();
+        course.setId(courseId);
+        course.setStatus("Normal");
+        courseService.updateById(course);
+        return RetVal.success();
+    }
+    //7.删除课程
+    @DeleteMapping("deleteCourseById/{courseId}")
+    public RetVal deleteCourseById(@PathVariable String courseId){
+        courseService.deleteCourseById(courseId);
         return RetVal.success();
     }
 

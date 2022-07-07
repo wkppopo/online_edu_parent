@@ -74,5 +74,8 @@ public class EduCourse implements Serializable {
     @ApiModelProperty(value = "一级分类id")
     private String parentSubjectId;
 
+    @ApiModelProperty(value = "二级分类id")
+    private String childSubjectId;
+
 
 }
