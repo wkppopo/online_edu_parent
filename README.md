@@ -68,3 +68,24 @@
     			第二种方案
     				把xml文件放到resources目录下 需要同mapper所在的包同一级
     				如果不在同一级 还是需要配置 mybatis-plus.mapper-locations
+// 搭建springCloud微服务，+ 远程调用步骤
+    1.在父pom中加上springCloud的父依赖
+    2.搭建eureka 服务端 ：需要加入服务端依赖
+        2.1 需要加入服务端依赖
+        2.2 编写配置文件
+        2.3 启动类上加注解 @EnableEurekaServer
+        
+    3.搭建服务提供端
+        3.1 加入eureka客户端依赖
+        3.2 编写配置类
+        3.3 主启动类加服务发现注解 @EnableDiscoveryClient //开启服务发现
+        
+    4.搭建服务消费端
+        4.1 加入eureka客户端依赖
+        4.2 编写配置类
+        4.3 主启动类加服务发现注解 @EnableDiscoveryClient //开启服务发现
+        4.4 多一步：
+                - 需要加openFeign依赖
+                - 主启动类加注解 EnableFeignClients //开启远程调用
+                - 编写远程调用接口 加注解 @FeignClient(value = "EDU-VIDEO",fallback = VideoServiceHandler.class)
+                - 编写 VideoServiceHandler 类中的兜底方法

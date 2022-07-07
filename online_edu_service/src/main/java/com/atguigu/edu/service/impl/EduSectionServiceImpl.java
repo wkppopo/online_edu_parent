@@ -4,9 +4,11 @@ import com.atguigu.edu.entity.EduSection;
 import com.atguigu.edu.exception.MyException1;
 import com.atguigu.edu.mapper.EduSectionMapper;
 import com.atguigu.edu.service.EduSectionService;
+import com.atguigu.edu.videoFeignservice.VideoFeignService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +24,9 @@ import java.util.List;
  */
 @Service
 public class EduSectionServiceImpl extends ServiceImpl<EduSectionMapper, EduSection> implements EduSectionService {
+
+    @Autowired
+    private VideoFeignService videoFeignService;
 
     @Override
     public void addSection(EduSection section) {
@@ -44,7 +49,8 @@ public class EduSectionServiceImpl extends ServiceImpl<EduSectionMapper, EduSect
         EduSection eduSection = baseMapper.selectById(id);
         String videoSourceId = eduSection.getVideoSourceId();
         if (StringUtils.isNotEmpty(videoSourceId)) {
-            //TODO 远程调用Video服务 删除视频
+            // 远程调用Video服务 删除视频
+            videoFeignService.deleteSingleVideo(videoSourceId);
 
         }
         //最后删除小节信息
@@ -69,8 +75,8 @@ public class EduSectionServiceImpl extends ServiceImpl<EduSectionMapper, EduSect
                 videoIdList.add(videoSourceId);
             }
         }
-        //TODO 调用微服务接口 批量删除所有的视频
-
+        // 调用微服务接口 批量删除所有的视频
+        videoFeignService.deleteMultiVideo(videoIdList);
 
         baseMapper.delete(wrapper);
     }

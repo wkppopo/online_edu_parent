@@ -11,7 +11,19 @@
 
     <artifactId>online_edu_service</artifactId>
     <packaging>jar</packaging>
+
+
     <dependencies>
+        <!--服务调用-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!--服务注册-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
         <!--xls 03-->
         <dependency>
             <groupId>org.apache.poi</groupId>
