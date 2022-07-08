@@ -12,11 +12,16 @@
     <artifactId>online_edu_video</artifactId>
 
     <dependencies>
-        <!--服务注册-->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>2.1.0.RELEASE</version>
         </dependency>
+        <!--服务注册-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
+<!--        </dependency>-->
 <!--     阿里云视频点播sdk-->
         <dependency>
             <groupId>com.aliyun</groupId>
