@@ -13,6 +13,8 @@
         <module>online_edu_oss</module>
         <module>online_edu_video</module>
         <module>online_edu_register</module>
+        <module>online_edu_user</module>
+        <module>online_edu_statistics</module>
     </modules>
     <packaging>pom</packaging>
 

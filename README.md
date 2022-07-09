@@ -89,3 +89,4 @@
                 - 主启动类加注解 EnableFeignClients //开启远程调用
                 - 编写远程调用接口 加注解 @FeignClient(value = "EDU-VIDEO",fallback = VideoServiceHandler.class)
                 - 编写 VideoServiceHandler 类中的兜底方法
+                
